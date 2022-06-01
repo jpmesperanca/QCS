@@ -1,0 +1,153 @@
+Cyclomatic complexity:
+	
+	# https://app.code2flow.com/sukPO7dyx0hG
+	createAuxMatrix - 4 + 1 
+	fillAux - 3 + 1
+	findMax - 3 + 1
+
+
+Unit testing tool:
+
+	Must be able to:
+		- Boundary value testing
+		- Equivalence partition testing
+		- Control flow testing
+		- Data flow testing (optional)
+
+	Pela minha pesquisa, é dar 'import unittest' e escrever testes lá para dentro.
+
+
+Black Box Tests:
+	
+	1. Defining domain
+	2. Partition the test cases into valid and invalid equivalence classes
+	3. Test all the combination of classes
+	4. Check for boundary cases in the classes
+	5. Test all the combination of boundary cases
+
+	# Não sei se precisamos de testar o 3 ou se basta no 5
+
+	R - Número linhas
+	C - Número colunas
+	M - Matriz original
+	S - Matriz sizes
+
+	Não vamos alterar o número de linhas nem de colunas porque são calculados pela função len() do python. Assume-se que devolve valores corretos
+	Não vamos testar matrizes S incorretas. Assume-se que o output das funções anteriores está correto
+
+	createAuxMatrix:
+
+		Input: R, C, S, M
+		Inputs a testar: M (R e C corretos dependentes de M, S vazio)
+		Output: S com primeira coluna e linha iguais a M, resto 0's
+
+		Domain 						-	M - [0x0, 999999x999999]
+		
+		Valid equivalence classes 	- 	M - 0x0
+											[1x1, 9x9]
+											[10x10, 999999x999999]
+
+		Invalid equivalence classes	-	M - Non-binary matrix
+
+		Boundary cases 				-	M - 0x0, 1x1
+											9x9, 10x10
+											999998x999998, 999999x999999, 1000000x1000000 (maior matriz possível)
+
+	fillAux
+
+		Input:  R, C, S, M
+		Inputs a testar: M (R, C, e S corretos dependentes de M)
+		Output: S completada com os sizes
+
+		Domain 						-	M - [0x0, 999999x999999]
+										
+		Valid equivalence classes 	- 	M - 0x0
+											[1x1, 9x9]
+											[10x10, 999999x999999]
+
+		Invalid equivalence classes	-	M - Non-binary matrix
+
+		Boundary cases 				-	M - 0x0, 1x1
+											9x9, 10x10
+											999998x999998, 999999x999999, 1000000x1000000
+
+	findMax
+		# De notar que o input desta nao suporta o output da anterior
+		Input:  R, C, S
+		Inputs a testar: S (R e C dependentes de S)
+		Output: O valor máximo de S e as suas coordenadas
+
+		Domain 						-	S - [0x0, 999999x999999]
+		
+		Valid equivalence classes 	- 	S - 0x0
+											[1x1, 9x9]
+											[10x10, 999999x999999]
+
+		Invalid equivalence classes	-	S - A matrix not matching C or R
+
+		Boundary cases 				-	S - 0x0, 1x1, 2x2
+											9x9, 10x10
+											999998x999998, 999999x999999, 1000000x1000000
+
+
+Control Flow Tests:
+
+	R - Número linhas
+	C - Número colunas
+	M - Matriz original
+	S - Matriz sizes
+
+	Fazer mais do que 1 teste por path
+
+	createAuxMatrix:
+
+		Input:  R, C, S, M
+		Output: S com primeira coluna e linha iguais a M, resto 0's
+
+		Path 1 -> R = 0
+		Path 2 -> R != 0, C = 0 Unfeasable
+
+		Path 3 -> R != 0, C != 0, (i = 0)
+		Path 4 -> R != 0, C != 0, (j = 0) Unfeasable
+		Path 5 -> R != 0, C != 0, (i != 0, j != 0) Unfeasable
+
+
+	fillAux
+
+		Input:  R, C, S, M
+		Output: S completada com os sizes
+
+		Path 1 -> R = 0
+		Path 2 -> R != 0, C = 0 #Non-executable pois é impossível ter uma matriz com >0 linhas e 0 colunas
+
+		Path 3 -> R != 0, C != 0, M[i,j] = 1 
+		Path 4 -> R != 0, C != 0, M[i,j] != 1
+
+
+	findMax
+
+		Input:  R, C, S
+		Output: O valor máximo de S e as suas coordenadas
+	
+		Path 1 -> R = 0 #A função não pode ser executada com matrizes nulas.
+		Path 2 -> R != 0, C = 0 #Non-executable pois é impossível ter uma matriz com >0 linhas e 0 colunas
+
+		Path 3 -> R != 0, C != 0, S[i,j] > max_of_S (S[0,0])
+		Path 4 -> R != 0, C != 0, S[i,j] <= max_of_S (S[0,0])
+
+
+Data Flow Tests:
+
+	1. Draw a data flow graph from the program.
+	2. Select one or more data flow testing criteria.
+	3. Identify paths in the data flow graph satisfying the	selection criteria.
+	4. Derive path predicate expressions from the selected paths
+	5. Solve the path predicate expressions to derive test inputs
+
+	1 - Done
+	2 - ADUP - Mais completo
+	3 - 
+	4 - ???
+	5 - 
+
+	

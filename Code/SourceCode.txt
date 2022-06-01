@@ -1,0 +1,61 @@
+function createAuxMatrix(R, C, S, M){ 
+    
+  for i in range(R){                
+    temp = []
+    for j in range(C){
+      if i==0{
+        temp += M[i][j],
+      }
+      else if j==0{
+        temp += M[i][j],
+      }
+      else{
+        temp += 0,
+      }
+      S += temp,
+    }
+  }
+  return exitFunction
+}
+
+function fillAux(R, C, S, M){
+
+  for i in range(1, R){
+    for j in range(1, C){
+      if (M[i][j] == 1){
+        S[i][j] = min(S[i][j-1], S[i-1][j], S[i-1][j-1]) + 1
+      }
+      else{
+        S[i][j] = 0
+      }
+    }
+  }
+  return exitFunction
+}
+
+function findMax(R, C, S){
+  max_of_s = S[0][0]
+  max_i = 0
+  max_j = 0;
+    
+  for i in range(R){
+    for j in range(C){
+      if (max_of_s < S[i][j]){
+        max_of_s = S[i][j]
+        max_i = i
+        max_j = j
+      }
+    }
+  }
+  return exitFunction 
+}
+
+function main(M){
+  R = len(M)
+  C = len(M[0])
+  S = []
+
+  call createAuxMatrix(R, C, S, M)
+  call fillAux(R, C, S, M)
+  call findMax(R, C, S)
+} 
