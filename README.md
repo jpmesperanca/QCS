@@ -5,4 +5,4 @@ We also take a further look at how code complexity affects software maintainabil
 
 Also in this repository we can find all the dynamic software testing performed on a matrix algorithm. We cover everything from black box testing with boundary value analysis to white box testing with control flow and data flow testing. 
 
-The software test plan and results in the document "Dynamic software testing"
+The software test plan and results are presented in the document "Dynamic software testing".
